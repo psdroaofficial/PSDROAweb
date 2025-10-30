@@ -114,11 +114,47 @@ const ANN_USERS = { "Bryan":"Bry@2025!", "Jensen":"J3ns3n#Save", "Ahmad":"Ahm4d$
 const ANN_BIN_ID = "6903802ed0ea881f40c76129";
 const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
 const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
+
 const loginAnnBtn = document.getElementById("login-ann-btn");
 const annControls = document.querySelector("#announcement-section .controls");
 const annTextarea = document.getElementById("announcement-text");
 const saveAnnBtn = document.getElementById("save-ann-btn");
 
+// Add a public view div
+let annView = document.getElementById("announcement-view");
+if(!annView){
+  annView = document.createElement("div");
+  annView.id = "announcement-view";
+  annView.style.width = "100%";
+  annView.style.maxWidth = "700px";
+  annView.style.background = "#1b1b1b";
+  annView.style.padding = "15px";
+  annView.style.border = "1px solid #333";
+  annView.style.borderRadius = "6px";
+  annView.style.minHeight = "50px";
+  annView.style.color = "#ddd";
+  annView.textContent = "Loading announcement...";
+  const annSection = document.getElementById("announcement-section");
+  annSection.insertBefore(annView, loginAnnBtn);
+}
+
+// Load announcement (both public view and editor)
+async function loadAnn(){
+  try{
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}/latest`,{
+      headers:{ "X-Master-Key": MASTER_KEY, "X-Access-Key": ACCESS_KEY }
+    });
+    const data = await res.json();
+    const content = data.record?.content || "";
+    annTextarea.value = content;      // Editor
+    annView.textContent = content;     // Public view
+  } catch(err){ console.error(err); annView.textContent = "Failed to load announcement."; }
+}
+
+// Load announcement initially for public view
+loadAnn();
+
+// Login button for editing
 loginAnnBtn.addEventListener("click", ()=>{
   if(localStorage.getItem("annLoggedIn")==="true"){ annControls.style.display="flex"; loadAnn(); return; }
   const user = prompt("Username:");
@@ -130,16 +166,7 @@ loginAnnBtn.addEventListener("click", ()=>{
   } else alert("Access denied.");
 });
 
-async function loadAnn(){
-  try{
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}/latest`,{
-      headers:{ "X-Master-Key": MASTER_KEY, "X-Access-Key": ACCESS_KEY }
-    });
-    const data = await res.json();
-    annTextarea.value = data.record.content || "";
-  } catch(err){ console.error(err); alert("Failed to load announcement."); }
-}
-
+// Save button
 saveAnnBtn.addEventListener("click", async ()=>{
   try{
     await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}`,{
@@ -147,9 +174,11 @@ saveAnnBtn.addEventListener("click", async ()=>{
       headers:{ "Content-Type":"application/json","X-Master-Key": MASTER_KEY,"X-Access-Key":ACCESS_KEY },
       body: JSON.stringify({ content: annTextarea.value })
     });
+    annView.textContent = annTextarea.value; // update public view
     alert("Announcement saved!");
   } catch(err){ console.error(err); alert("Failed to save."); }
 });
+
 
 // ==== Docs Section ====
 let currentDocId = null;
