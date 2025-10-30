@@ -3,106 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PSDROA – The Peoples Socialist Democratic Republic of Amityans</title>
-  <link rel="icon" href="logo.jpeg" />
+  <title>PSDROA – Peoples Socialist Democratic Republic of Amityans</title>
+  <link rel="icon" href="IMG_0508.jpeg" />
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
-      color: #333;
+      background: #111;
+      color: #eee;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
     header {
-      background: #222;
-      color: #fff;
       text-align: center;
-      padding: 30px 20px;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid #222;
     }
 
     header img {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       margin-bottom: 15px;
     }
 
     header h1 {
-      font-size: 1.8em;
-      margin: 10px 0 0;
-      letter-spacing: 1px;
+      font-size: 1.8rem;
+      margin: 10px 0 5px;
+      font-weight: 500;
     }
 
     header p {
-      margin: 8px 0 0;
       font-style: italic;
       color: #aaa;
+      margin: 0;
     }
 
     main {
       flex: 1;
-      max-width: 850px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      animation: fadeIn 1.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    main h2 {
-      font-size: 1.5em;
-      color: #222;
-      margin-bottom: 15px;
-    }
-
-    main p {
-      line-height: 1.7;
-      font-size: 1.05em;
-      margin-bottom: 30px;
-      color: #444;
-    }
-
-    .join-btn {
-      background: #0078d7;
-      color: white;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: 0.3s;
+    a.join-btn {
+      background: #0a8f6a;
+      color: #fff;
       text-decoration: none;
-      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
 
-    .join-btn:hover {
-      background: #005fa3;
-      transform: scale(1.05);
+    a.join-btn:hover {
+      background: #087a59;
     }
 
     footer {
-      background: #222;
-      color: #ddd;
       text-align: center;
-      padding: 20px 10px;
-      font-size: 0.9em;
-      margin-top: 40px;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #222;
     }
 
     footer span {
-      color: #4CAF50;
-      font-weight: bold;
+      color: #0a8f6a;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -114,24 +85,6 @@
   </header>
 
   <main>
-    <h2>About PSDROA</h2>
-    <p>
-      The <strong>Peoples Socialist Democratic Republic of Amityans (PSDROA)</strong> is an
-      independent student-led organization built by and for the students of
-      <strong>Amity Private School, Sharjah</strong>.
-    </p>
-
-    <p>
-      It serves as a safe, collaborative space where Amityans can freely connect, discuss,
-      and work together — <strong>without teacher involvement</strong>. PSDROA operates
-      through Microsoft Teams as a self-governed republic of students, fostering open
-      discussion, creativity, and unity.
-    </p>
-
-    <p>
-      <em>Join the movement. Be part of something truly free.</em>
-    </p>
-
     <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">
       Join PSDROA
     </a>
