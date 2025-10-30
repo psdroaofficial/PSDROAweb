@@ -45,8 +45,10 @@
     main {
       flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 20px;
     }
 
     a.join-btn {
@@ -61,6 +63,45 @@
 
     a.join-btn:hover {
       background: #087a59;
+    }
+
+    button.secret-btn {
+      background: transparent;
+      color: #888;
+      border: 1px solid #333;
+      padding: 10px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    button.secret-btn:hover {
+      color: #fff;
+      border-color: #0a8f6a;
+    }
+
+    #special-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      border-top: 1px solid #222;
+    }
+
+    #special-section textarea {
+      width: 100%;
+      height: 180px;
+      background: #1b1b1b;
+      color: #ddd;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      resize: none;
+      font-family: monospace;
     }
 
     footer {
@@ -88,10 +129,34 @@
     <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">
       Join PSDROA
     </a>
+
+    <button class="secret-btn" onclick="accessSecret()">Special Purposes</button>
+
+    <div id="special-section">
+      <h3>Special Purposes Access</h3>
+      <textarea placeholder="Enter your notes or message here..."></textarea>
+    </div>
   </main>
 
   <footer>
     © 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.
   </footer>
+
+  <script>
+    // Random simple credentials
+    const USERNAME = "psdadmin";
+    const PASSWORD = "A9x7qR!3";
+
+    function accessSecret() {
+      const user = prompt("Enter username:");
+      const pass = prompt("Enter password:");
+      if (user === USERNAME && pass === PASSWORD) {
+        document.getElementById("special-section").style.display = "flex";
+        alert("Access granted.");
+      } else {
+        alert("Access denied.");
+      }
+    }
+  </script>
 </body>
 </html>
