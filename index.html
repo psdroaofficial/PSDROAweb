@@ -1,218 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PSDROA – Peoples Socialist Democratic Republic of Amityans</title>
-  <link rel="icon" href="IMG_0508.jpeg" />
-  <style>
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-      border-bottom: 1px solid #222;
-    }
-
-    header img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-      margin: 10px 0 5px;
-      font-weight: 500;
-    }
-
-    header p {
-      font-style: italic;
-      color: #aaa;
-      margin: 0;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    a.join-btn {
-      background: #0a8f6a;
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 36px;
-      border-radius: 6px;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-    }
-
-    a.join-btn:hover {
-      background: #087a59;
-    }
-
-    button.secret-btn, button#save-btn {
-      background: transparent;
-      color: #888;
-      border: 1px solid #333;
-      padding: 10px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-
-    button.secret-btn:hover, button#save-btn:hover {
-      color: #fff;
-      border-color: #0a8f6a;
-    }
-
-    #special-section {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      width: 90%;
-      max-width: 800px;
-      margin: 30px auto;
-      border-top: 1px solid #222;
-      gap: 10px;
-    }
-
-    #special-section textarea {
-      width: 100%;
-      height: 500px;
-      background: #1b1b1b;
-      color: #ddd;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 10px;
-      resize: vertical;
-      font-family: monospace;
-      overflow: auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #222;
-    }
-
-    footer span {
-      color: #0a8f6a;
-      font-weight: 600;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSDROA – Peoples Socialist Democratic Republic of Amityans</title>
+<link rel="icon" href="IMG_0508.jpeg">
+<style>
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #111;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    text-align: center;
+    padding: 60px 20px 20px;
+    border-bottom: 1px solid #222;
+  }
+  header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    margin: 10px 0 5px;
+    font-weight: 500;
+  }
+  header p {
+    font-style: italic;
+    color: #aaa;
+    margin: 0;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+  }
+  a.join-btn {
+    background: #0a8f6a;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  a.join-btn:hover { background: #087a59; }
+  button {
+    background: transparent;
+    color: #888;
+    border: 1px solid #333;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  button:hover { color: #fff; border-color: #0a8f6a; }
+  #announcement-section, #special-section {
+    width: 90%;
+    max-width: 800px;
+    border-top: 1px solid #222;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #announcement-display, #announcement-text, #special-text {
+    width: 100%;
+    min-height: 150px;
+    background: #1b1b1b;
+    color: #ddd;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: monospace;
+    resize: vertical;
+    overflow: auto;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <img src="IMG_0508.jpeg" alt="PSDROA Logo" />
-    <h1>Peoples Socialist Democratic Republic of Amityans</h1>
-    <p>“Be Free Forever.”</p>
-  </header>
+<header>
+  <img src="IMG_0508.jpeg" alt="PSDROA Logo">
+  <h1>Peoples Socialist Democratic Republic of Amityans</h1>
+  <p>“Be Free Forever.”</p>
+</header>
 
-  <main>
-    <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">
-      Join PSDROA
-    </a>
+<main>
+  <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">Join PSDROA</a>
 
-    <button class="secret-btn" onclick="accessSecret()">Special Purposes</button>
+  <!-- Announcement Section -->
+  <div id="announcement-section">
+    <h3>Announcements</h3>
+    <div id="announcement-display"></div>
+    <textarea id="announcement-text" style="display:none;"></textarea>
+    <button id="edit-announcement-btn">Edit Announcement</button>
+    <button id="save-announcement-btn" style="display:none;">Save</button>
+  </div>
 
-    <div id="special-section">
-      <h3>Special Purposes Access</h3>
-      <textarea id="special-text"></textarea>
-      <button id="save-btn" onclick="saveText()">Save</button>
-    </div>
-  </main>
+  <!-- Special Purposes Section -->
+  <button onclick="accessSecret()">Special Purposes</button>
+  <div id="special-section" style="display:none;">
+    <h3>Special Purposes Access</h3>
+    <textarea id="special-text"></textarea>
+    <button onclick="saveText()">Save</button>
+  </div>
+</main>
 
-  <footer>
-    © 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.
-  </footer>
+<footer>
+  © 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.
+</footer>
 
-  <script>
-    const USERNAME = "psdadmin";
-    const PASSWORD = "A9x7qR!3";
+<script>
+  // JSONBin credentials
+  const ANNOUNCE_BIN_ID = "6903802ed0ea881f40c76129"; // Announcement bin
+  const SPECIAL_BIN_ID = "690377df43b1c97be98c57f7"; // Special purposes bin
+  const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
+  const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
 
-    // JSONBin credentials
-    const BIN_ID = "690377df43b1c97be98c57f7";
-    const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
-    const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
+  // Announcement Users
+  const ANNOUNCE_USERS = {
+    "Bryan":"Bry@2025!",
+    "Jensen":"J3ns3n#Save",
+    "Ahmad":"Ahm4d$Edit"
+  };
 
-    async function loadText() {
-      try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-          headers: {
-            "X-Master-Key": MASTER_KEY,
-            "X-Access-Key": ACCESS_KEY
-          }
-        });
-        const data = await res.json();
-        document.getElementById("special-text").value = data.record.specialText || "";
-      } catch (err) {
-        console.error("Error loading text:", err);
-      }
+  const announcementDisplay = document.getElementById("announcement-display");
+  const announcementTextarea = document.getElementById("announcement-text");
+  const editBtn = document.getElementById("edit-announcement-btn");
+  const saveBtn = document.getElementById("save-announcement-btn");
+
+  // Load announcement from JSONBin
+  async function loadAnnouncement() {
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${ANNOUNCE_BIN_ID}/latest`, {
+        headers: { "X-Master-Key": MASTER_KEY, "X-Access-Key": ACCESS_KEY }
+      });
+      const data = await res.json();
+      const text = data.record.announcement || "";
+      announcementDisplay.innerText = text;
+      announcementTextarea.value = text;
+    } catch (err) { console.error("Error loading announcement:", err); }
+  }
+
+  // Save announcement to JSONBin
+  async function saveAnnouncement() {
+    const text = announcementTextarea.value;
+    try {
+      await fetch(`https://api.jsonbin.io/v3/b/${ANNOUNCE_BIN_ID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": MASTER_KEY,
+          "X-Access-Key": ACCESS_KEY
+        },
+        body: JSON.stringify({ announcement: text })
+      });
+      announcementDisplay.innerText = text;
+      announcementTextarea.style.display = "none";
+      saveBtn.style.display = "none";
+      editBtn.style.display = "inline-block";
+      alert("Announcement saved!");
+    } catch (err) {
+      console.error("Error saving announcement:", err);
+      alert("Failed to save.");
     }
+  }
 
-    async function saveText() {
-      const text = document.getElementById("special-text").value;
-      try {
-        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Master-Key": MASTER_KEY,
-            "X-Access-Key": ACCESS_KEY
-          },
-          body: JSON.stringify({ specialText: text })
-        });
-        alert("Text saved!");
-      } catch (err) {
-        console.error("Error saving text:", err);
-        alert("Failed to save text.");
-      }
+  // Announcement edit/login logic
+  editBtn.addEventListener("click", () => {
+    if(localStorage.getItem("announceLoggedIn") === "true"){
+      announcementTextarea.style.display = "block";
+      saveBtn.style.display = "inline-block";
+      editBtn.style.display = "none";
+      return;
     }
-
-    function accessSecret() {
-      // Check if already logged in on this device
-      if (localStorage.getItem("psdLoggedIn") === "true") {
-        document.getElementById("special-section").style.display = "flex";
-        loadText();
-        return;
-      }
-
-      const user = prompt("Enter username:");
-      const pass = prompt("Enter password:");
-      if (user === USERNAME && pass === PASSWORD) {
-        localStorage.setItem("psdLoggedIn", "true"); // remember login for this device
-        document.getElementById("special-section").style.display = "flex";
-        alert("Access granted.");
-        loadText();
-      } else {
-        alert("Access denied.");
-      }
+    const user = prompt("Enter username:");
+    const pass = prompt("Enter password:");
+    if(ANNOUNCE_USERS[user] && ANNOUNCE_USERS[user] === pass){
+      localStorage.setItem("announceLoggedIn","true");
+      announcementTextarea.style.display = "block";
+      saveBtn.style.display = "inline-block";
+      editBtn.style.display = "none";
+    } else {
+      alert("Access denied.");
     }
+  });
 
-    // Optional: logout button functionality
-    function logout() {
-      localStorage.removeItem("psdLoggedIn");
-      document.getElementById("special-section").style.display = "none";
+  saveBtn.addEventListener("click", saveAnnouncement);
+
+  // Special Purposes Section
+  const USERNAME = "psdadmin";
+  const PASSWORD = "A9x7qR!3";
+
+  function accessSecret() {
+    if(localStorage.getItem("psdLoggedIn")==="true"){
+      document.getElementById("special-section").style.display="flex";
+      loadSpecialText();
+      return;
     }
-  </script>
+    const user = prompt("Enter username:");
+    const pass = prompt("Enter password:");
+    if(user===USERNAME && pass===PASSWORD){
+      localStorage.setItem("psdLoggedIn","true");
+      document.getElementById("special-section").style.display="flex";
+      loadSpecialText();
+    } else { alert("Access denied."); }
+  }
+
+  async function loadSpecialText() {
+    try{
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${SPECIAL_BIN_ID}/latest`,{
+        headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
+      });
+      const data = await res.json();
+      document.getElementById("special-text").value = data.record.specialText || "";
+    } catch(err){ console.error(err); }
+  }
+
+  async function saveText() {
+    const text = document.getElementById("special-text").value;
+    try{
+      await fetch(`https://api.jsonbin.io/v3/b/${SPECIAL_BIN_ID}`,{
+        method:"PUT",
+        headers:{ "Content-Type":"application/json", "X-Master-Key":MASTER_KEY, "X-Access-Key":ACCESS_KEY },
+        body: JSON.stringify({ specialText:text })
+      });
+      alert("Text saved!");
+    } catch(err){ console.error(err); alert("Failed to save."); }
+  }
+
+  // Load announcement on page load
+  loadAnnouncement();
+</script>
 </body>
 </html>
