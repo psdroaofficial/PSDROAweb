@@ -65,7 +65,7 @@
       background: #087a59;
     }
 
-    button.secret-btn {
+    button.secret-btn, button#save-btn {
       background: transparent;
       color: #888;
       border: 1px solid #333;
@@ -76,7 +76,7 @@
       transition: all 0.3s;
     }
 
-    button.secret-btn:hover {
+    button.secret-btn:hover, button#save-btn:hover {
       color: #fff;
       border-color: #0a8f6a;
     }
@@ -87,21 +87,23 @@
       align-items: center;
       padding: 20px;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       margin: 30px auto;
       border-top: 1px solid #222;
+      gap: 10px;
     }
 
     #special-section textarea {
       width: 100%;
-      height: 180px;
+      height: 500px;
       background: #1b1b1b;
       color: #ddd;
       border: 1px solid #333;
       border-radius: 6px;
       padding: 10px;
-      resize: none;
+      resize: vertical;
       font-family: monospace;
+      overflow: auto;
     }
 
     footer {
@@ -134,44 +136,8 @@
 
     <div id="special-section">
       <h3>Special Purposes Access</h3>
-
-      <!-- Replaced the textarea with the formatted conversation as requested -->
-      <div class="conversation" style="width:100%; background:#0f0f0f; border:1px solid #222; padding:16px; border-radius:6px; color:#e8e8e8; line-height:1.6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;">
-        <p><strong>Ameirah (skeptical):</strong> Oh great. Another “Save the Earth” app. Because that’s what we need — another download while people still leave lights on.</p>
-
-        <p><strong>Bryan (calm, confident):</strong> I get it. But this one’s different. Meet ConserveWise — the app that helps you protect the planet, one small daily goal at a time.</p>
-
-        <p><strong>Ameirah:</strong> Daily goals? Like what — “Hug a tree and take a selfie”?</p>
-
-        <p><strong>Bryan (grinning):</strong> Not even close. Each day gives you something real — like today’s:<br>💧 “Take shorter showers to save water.”</p>
-
-        <p><strong>Ameirah (teasing):</strong> So my five-minute concerts are canceled?</p>
-
-        <p><strong>Bryan:</strong> Not canceled — just remixed for the planet. Tomorrow might be “Unplug chargers” or “Use a reusable bottle.” Small actions, big results.</p>
-
-        <p><strong>Ahmad:</strong> Makes sense. Change doesn’t need to be huge — just consistent. Skip waste today, save resources tomorrow. Every step matters when everyone takes one. You don’t need to be perfect — just aware.</p>
-
-        <p><strong>Jensen:</strong> Exactly. That’s the power of habits. Do one small thing every day, and suddenly — it’s second nature.</p>
-
-        <p><strong>Bryan:</strong> That’s the idea. No fake points, no leaderboards — just real actions that make a real difference. And each goal explains why it matters — how saving water also saves energy, cuts emissions, and protects our future.</p>
-
-        <p><strong>Ameirah (softening):</strong> You know, that’s actually pretty smart. People want to help — they just don’t always know where to start.</p>
-
-        <p><strong>Ahmad:</strong> And that’s where ConserveWise fits in. Guidance, not guilt. Small choices that build a bigger change.</p>
-
-        <p><strong>Jensen:</strong> It’s not just an app — it’s a reminder that action starts with awareness. Simple. Real. Habit-forming.</p>
-
-        <p><strong>Bryan:</strong> Exactly. Start today — one goal, one day, one planet.</p>
-
-        <p><strong>Ameirah (smiling):</strong> Alright, fine — you win. ConserveWise isn’t just another green app… it’s a mindset.</p>
-
-        <p><strong>Ahmad:</strong> And every mindset shift brings us closer to a better world.</p>
-
-        <p><strong>Jensen:</strong> Let’s do this — for the planet, and for us.</p>
-
-        <p style="text-align:center; margin-top:12px; font-weight:700;">🌿 Be aware. Take action. Conserve — with ConserveWise!<br>🌍 One app. One planet. One mission — ConserveWise.</p>
-      </div>
-      <!-- End conversation -->
+      <textarea id="special-text"></textarea>
+      <button id="save-btn" onclick="saveText()">Save</button>
     </div>
   </main>
 
@@ -180,19 +146,72 @@
   </footer>
 
   <script>
-    // Random simple credentials
     const USERNAME = "psdadmin";
     const PASSWORD = "A9x7qR!3";
 
+    // JSONBin credentials
+    const BIN_ID = "690377df43b1c97be98c57f7";
+    const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
+    const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
+
+    async function loadText() {
+      try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+          headers: {
+            "X-Master-Key": MASTER_KEY,
+            "X-Access-Key": ACCESS_KEY
+          }
+        });
+        const data = await res.json();
+        document.getElementById("special-text").value = data.record.specialText || "";
+      } catch (err) {
+        console.error("Error loading text:", err);
+      }
+    }
+
+    async function saveText() {
+      const text = document.getElementById("special-text").value;
+      try {
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": MASTER_KEY,
+            "X-Access-Key": ACCESS_KEY
+          },
+          body: JSON.stringify({ specialText: text })
+        });
+        alert("Text saved!");
+      } catch (err) {
+        console.error("Error saving text:", err);
+        alert("Failed to save text.");
+      }
+    }
+
     function accessSecret() {
+      // Check if already logged in on this device
+      if (localStorage.getItem("psdLoggedIn") === "true") {
+        document.getElementById("special-section").style.display = "flex";
+        loadText();
+        return;
+      }
+
       const user = prompt("Enter username:");
       const pass = prompt("Enter password:");
       if (user === USERNAME && pass === PASSWORD) {
+        localStorage.setItem("psdLoggedIn", "true"); // remember login for this device
         document.getElementById("special-section").style.display = "flex";
         alert("Access granted.");
+        loadText();
       } else {
         alert("Access denied.");
       }
+    }
+
+    // Optional: logout button functionality
+    function logout() {
+      localStorage.removeItem("psdLoggedIn");
+      document.getElementById("special-section").style.display = "none";
     }
   </script>
 </body>
