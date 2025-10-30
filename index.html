@@ -48,15 +48,23 @@ footer span { color:#0a8f6a; font-weight:600; }
 
 <!-- Announcement Section -->
 <div id="announcement-section">
-<h3>Announcement</h3>
-<button id="login-ann-btn">Login to Edit Announcement</button>
-<div class="controls">
-<textarea id="announcement-text"></textarea>
-<div class="button-group">
-<button id="save-ann-btn">Save Announcement</button>
+  <h3>Announcement</h3>
+  
+  <!-- Public view -->
+  <div id="announcement-view" style="width:100%; max-width:700px; background:#1b1b1b; padding:15px; border:1px solid #333; border-radius:6px; min-height:50px; color:#ddd;">
+    Loading announcement...
+  </div>
+  
+  <!-- Edit controls, hidden by default -->
+  <button id="login-ann-btn">Login to Edit Announcement</button>
+  <div class="controls">
+    <textarea id="announcement-text"></textarea>
+    <div class="button-group">
+      <button id="save-ann-btn">Save Announcement</button>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+
 
 <!-- Docs Section -->
 <div id="docs-section">
