@@ -5,277 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PSDROA – Peoples Socialist Democratic Republic of Amityans</title>
 <link rel="icon" href="IMG_0508.jpeg">
-<style>
-body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; margin:0; padding:0; background:#111; color:#eee; display:flex; flex-direction:column; min-height:100vh; }
-header { text-align:center; padding:60px 20px 40px; border-bottom:1px solid #222; }
-header img { width:100px; height:100px; border-radius:50%; margin-bottom:15px; }
-header h1 { font-size:1.8rem; margin:10px 0 5px; font-weight:500; }
-header p { font-style:italic; color:#aaa; margin:0; }
-main { flex:1; display:flex; flex-direction:column; align-items:center; gap:30px; padding:20px; }
-a.join-btn { background:#0a8f6a; color:#fff; text-decoration:none; padding:14px 36px; border-radius:6px; font-size:1rem; transition: background 0.3s ease; }
-a.join-btn:hover { background:#087a59; }
-button.secret-btn, button { background:transparent; color:#888; border:1px solid #333; padding:10px 25px; border-radius:5px; cursor:pointer; font-size:0.9rem; transition:all 0.3s; }
-button.secret-btn:hover, button:hover { color:#fff; border-color:#0a8f6a; }
-#special-section, #announcement-section .controls { display:none; flex-direction:column; align-items:center; padding:20px; width:90%; max-width:700px; margin:30px auto; border-top:1px solid #222; }
-#docs-section .controls { display:flex; flex-direction:column; align-items:center; padding:20px; width:90%; max-width:700px; margin:30px auto; border-top:1px solid #222; }
-#doc-editor { display:none; width:100%; }
-textarea { width:100%; background:#1b1b1b; color:#ddd; border:1px solid #333; border-radius:6px; padding:10px; resize:none; font-family: monospace; }
-footer { text-align:center; padding:15px; font-size:0.9rem; color:#777; border-top:1px solid #222; }
-footer span { color:#0a8f6a; font-weight:600; }
-.button-group { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-#docs-section textarea { min-height:250px; }
-#docs-section p { color:#aaa; font-size:0.9rem; margin-top:5px; }
-#current-doc-id { margin-top:10px; width:100%; padding:8px; background:#222; color:#0a8f6a; border:1px solid #333; border-radius:6px; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-<img src="IMG_0508.jpeg" alt="PSDROA Logo">
-<h1>Peoples Socialist Democratic Republic of Amityans</h1>
-<p>“Be Free Forever.”</p>
+  <img src="IMG_0508.jpeg" alt="PSDROA Logo">
+  <h1>Peoples Socialist Democratic Republic of Amityans</h1>
+  <p>“Be Free Forever.”</p>
+  <button id="editor-login-btn" class="top-right-btn">Editor Login</button>
 </header>
 
 <main>
-<a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">Join PSDROA</a>
+  <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">Join PSDROA</a>
 
-<!-- Special Purposes -->
-<button class="secret-btn" onclick="accessSpecial()">Special Purposes</button>
-<div id="special-section">
-<h3>Special Purposes Access</h3>
-<textarea></textarea>
-</div>
+  <!-- Special Purposes -->
+  <section id="special-section" class="editor-only">
+    <h3>Special Purposes Access</h3>
+    <textarea></textarea>
+  </section>
 
-<!-- Announcement Section -->
-<div id="announcement-section">
-  <h3>Announcement</h3>
-  
-  <!-- Public view -->
-  <div id="announcement-view" style="width:100%; max-width:700px; background:#1b1b1b; padding:15px; border:1px solid #333; border-radius:6px; min-height:50px; color:#ddd;">
-    Loading announcement...
-  </div>
-  
-  <!-- Edit controls, hidden by default -->
-  <button id="login-ann-btn">Login to Edit Announcement</button>
-  <div class="controls">
-    <textarea id="announcement-text"></textarea>
-    <div class="button-group">
-      <button id="save-ann-btn">Save Announcement</button>
+  <!-- Announcement Section -->
+  <section id="announcement-section">
+    <h3>Announcement</h3>
+    <div id="announcement-view" class="public-view">Loading announcement...</div>
+    <div class="controls editor-only">
+      <textarea id="announcement-text"></textarea>
+      <div class="button-group">
+        <button id="save-ann-btn">Save Announcement</button>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
+  <!-- Docs Section -->
+  <section id="docs-section">
+    <h3>Docs</h3>
+    <p>This is PSDROA's alternative to Notepad — for general purposes and code editing. Everyone can create docs; only authorized editors can delete. <strong>Load and read Bin ID 69038a52ae596e708f383670 before using.</strong></p>
+    <div class="controls">
+      <div class="button-group">
+        <button id="create-doc-btn">Create New Doc</button>
+        <button id="load-doc-btn">Load Doc</button>
+      </div>
+      <div id="doc-editor" class="editor-only">
+        <input type="text" id="current-doc-id" readonly>
+        <p>⚠️ Save this Bin ID somewhere safe. You’ll need it to edit this doc in the future.</p>
+        <textarea id="doc-text"></textarea>
+        <div class="button-group">
+          <button id="save-doc-btn">Save Doc</button>
+          <button id="delete-doc-btn">Delete Doc (Editors Only)</button>
+          <button id="export-doc-btn">Export as .txt</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Docs Section -->
-<div id="docs-section">
-<h3>Docs</h3>
-<p>This is PSDROA's alternative to Notepad — for general purposes and code editing. Everyone can create and edit docs; only authorized editors can delete. <strong>load and read the Bin ID 69038a52ae596e708f383670 before using</strong></p>
-<div class="controls">
-<div class="button-group">
-<button id="create-doc-btn">Create New Doc</button>
-<button id="load-doc-btn">Load Doc</button>
-</div>
-
-<!-- Editor container hidden initially -->
-<div id="doc-editor">
-<input type="text" id="current-doc-id" readonly placeholder="Bin ID will appear here after creating/loading a doc">
-<p style="color:#aaa; font-size:0.8rem; margin-top:5px;">
-⚠️ Save this Bin ID somewhere safe. You’ll need it to edit this doc in the future.
-</p>
-<textarea id="doc-text"></textarea>
-<div class="button-group">
-<button id="save-doc-btn">Save Doc</button>
-<button id="delete-doc-btn">Delete Doc (Editors Only)</button>
-<button id="export-doc-btn">Export as .txt</button>
-</div>
-</div>
-</div>
-</div>
-
+  <!-- Ads Section -->
+  <section id="ads-section">
+    <h3>Advertisements</h3>
+    <div id="ads-container" class="public-view">Loading ads...</div>
+    <div class="controls editor-only">
+      <textarea id="ad-text" placeholder="Ad text"></textarea>
+      <input type="text" id="ad-link" placeholder="Optional URL">
+      <button id="create-ad-btn">Create Ad</button>
+      <p>Contact <a href="mailto:psdroa.official@gmail.com">psdroa.official@gmail.com</a> for inquiries.</p>
+    </div>
+  </section>
 </main>
 
-<footer>© 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.</footer>
+<footer>
+  © 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.
+</footer>
 
-<script>
-// ==== Special Purposes ====
-const SPECIAL_USER = "psdadmin";
-const SPECIAL_PASS = "A9x7qR!3";
-function accessSpecial(){
-  const user = prompt("Enter username:");
-  const pass = prompt("Enter password:");
-  if(user===SPECIAL_USER && pass===SPECIAL_PASS){
-    document.getElementById("special-section").style.display="flex";
-    alert("Access granted.");
-  } else { alert("Access denied."); }
-}
-
-// ==== Announcement Section ====
-const ANN_USERS = { "Bryan":"Bry@2025!", "Jensen":"J3ns3n#Save", "Ahmad":"Ahm4d$Edit" };
-const ANN_BIN_ID = "6903802ed0ea881f40c76129";
-const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
-const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
-
-const loginAnnBtn = document.getElementById("login-ann-btn");
-const annControls = document.querySelector("#announcement-section .controls");
-const annTextarea = document.getElementById("announcement-text");
-const saveAnnBtn = document.getElementById("save-ann-btn");
-
-// Add a public view div
-let annView = document.getElementById("announcement-view");
-if(!annView){
-  annView = document.createElement("div");
-  annView.id = "announcement-view";
-  annView.style.width = "100%";
-  annView.style.maxWidth = "700px";
-  annView.style.background = "#1b1b1b";
-  annView.style.padding = "15px";
-  annView.style.border = "1px solid #333";
-  annView.style.borderRadius = "6px";
-  annView.style.minHeight = "50px";
-  annView.style.color = "#ddd";
-  annView.textContent = "Loading announcement...";
-  const annSection = document.getElementById("announcement-section");
-  annSection.insertBefore(annView, loginAnnBtn);
-}
-
-// Load announcement (both public view and editor)
-async function loadAnn(){
-  try{
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}/latest`,{
-      headers:{ "X-Master-Key": MASTER_KEY, "X-Access-Key": ACCESS_KEY }
-    });
-    const data = await res.json();
-    const content = data.record?.content || "";
-    annTextarea.value = content;      // Editor
-    annView.textContent = content;     // Public view
-  } catch(err){ console.error(err); annView.textContent = "Failed to load announcement."; }
-}
-
-// Load announcement initially for public view
-loadAnn();
-
-// Login button for editing
-loginAnnBtn.addEventListener("click", ()=>{
-  if(localStorage.getItem("annLoggedIn")==="true"){ annControls.style.display="flex"; loadAnn(); return; }
-  const user = prompt("Username:");
-  const pass = prompt("Password:");
-  if(ANN_USERS[user] && ANN_USERS[user]===pass){
-    localStorage.setItem("annLoggedIn","true");
-    annControls.style.display="flex";
-    loadAnn();
-  } else alert("Access denied.");
-});
-
-// Save button
-saveAnnBtn.addEventListener("click", async ()=>{
-  try{
-    await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}`,{
-      method:"PUT",
-      headers:{ "Content-Type":"application/json","X-Master-Key": MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-      body: JSON.stringify({ content: annTextarea.value })
-    });
-    annView.textContent = annTextarea.value; // update public view
-    alert("Announcement saved!");
-  } catch(err){ console.error(err); alert("Failed to save."); }
-});
-
-
-// ==== Docs Section ====
-let currentDocId = null;
-const DOC_USERS = ANN_USERS;
-const docTextarea = document.getElementById("doc-text");
-const docEditor = document.getElementById("doc-editor");
-const currentDocInput = document.getElementById("current-doc-id");
-const createDocBtn = document.getElementById("create-doc-btn");
-const loadDocBtn = document.getElementById("load-doc-btn");
-const saveDocBtn = document.getElementById("save-doc-btn");
-const deleteDocBtn = document.getElementById("delete-doc-btn");
-const exportDocBtn = document.getElementById("export-doc-btn");
-
-// Create doc
-createDocBtn.addEventListener("click", async ()=>{
-  const title = prompt("Enter doc title/ID:");
-  if(!title) return;
-  try{
-    const res = await fetch("https://api.jsonbin.io/v3/b",{
-      method:"POST",
-      headers:{ "Content-Type":"application/json", "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-      body: JSON.stringify({ title:title, content:"" })
-    });
-    const data = await res.json();
-    currentDocId = data.metadata.id;
-    currentDocInput.value = currentDocId;
-    docTextarea.value="";
-    docEditor.style.display="block"; // show editor
-    alert("New doc created! Bin ID: "+currentDocId);
-  } catch(err){ console.error(err); alert("Failed to create doc."); }
-});
-
-// Load doc
-loadDocBtn.addEventListener("click", async ()=>{
-  const binId = prompt("Enter Bin ID to load:");
-  if(!binId) return;
-  try{
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`,{
-      headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-    });
-    const data = await res.json();
-    currentDocId = binId;
-    currentDocInput.value = currentDocId;
-    docTextarea.value = data.record.content || "";
-    docEditor.style.display="block"; // show editor
-    alert("Doc loaded.");
-  } catch(err){ console.error(err); alert("Failed to load doc."); }
-});
-
-// Save doc
-saveDocBtn.addEventListener("click", async ()=>{
-  if(!currentDocId){ alert("No doc loaded."); return; }
-  try{
-    await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
-      method:"PUT",
-      headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-      body: JSON.stringify({ content: docTextarea.value })
-    });
-    alert("Doc saved!");
-  } catch(err){ console.error(err); alert("Failed to save."); }
-});
-
-// Delete only for editors
-deleteDocBtn.addEventListener("click", async ()=>{
-  const user = prompt("Username for deletion:");
-  const pass = prompt("Password:");
-  if(!DOC_USERS[user] || DOC_USERS[user]!==pass){ alert("Not authorized to delete."); return; }
-  if(!currentDocId){ alert("No doc loaded."); return; }
-  if(!confirm("Are you sure you want to delete this doc?")) return;
-  try{
-    await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
-      method:"DELETE",
-      headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-    });
-    currentDocId=null;
-    docTextarea.value="";
-    currentDocInput.value="";
-    docEditor.style.display="none";
-    alert("Doc deleted!");
-  } catch(err){ console.error(err); alert("Failed to delete."); }
-});
-
-// Export
-exportDocBtn.addEventListener("click", ()=>{
-  const text = docTextarea.value;
-  if(!text){ alert("Nothing to export!"); return; }
-  const blob = new Blob([text], { type:"text/plain" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "PSDROA_doc.txt";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-});
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
