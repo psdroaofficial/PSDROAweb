@@ -6,26 +6,25 @@
 <title>PSDROA – Peoples Socialist Democratic Republic of Amityans</title>
 <link rel="icon" href="IMG_0508.jpeg">
 <style>
-body { font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; margin:0;padding:0;background:#111;color:#eee; display:flex; flex-direction:column; min-height:100vh;}
-header { text-align:center;padding:60px 20px 40px; border-bottom:1px solid #222; position:relative;}
-header img { width:100px;height:100px;border-radius:50%; margin-bottom:15px;}
-header h1 { font-size:1.8rem;margin:10px 0 5px;font-weight:500;}
-header p { font-style:italic;color:#aaa;margin:0;}
-.top-right-btn { position:absolute; top:20px; right:20px; background:#0a8f6a; color:#fff; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;}
-.top-right-btn:hover { background:#087a59;}
-main { flex:1; display:flex; flex-direction:column; align-items:center; gap:30px; padding:20px;}
-a.join-btn { background:#0a8f6a; color:#fff; text-decoration:none; padding:14px 36px; border-radius:6px; font-size:1rem; transition: background 0.3s ease;}
-a.join-btn:hover { background:#087a59;}
-section { width:90%; max-width:700px; border-top:1px solid #222; padding-top:20px; }
-textarea, input[type=text] { width:100%; background:#1b1b1b; color:#ddd; border:1px solid #333; border-radius:6px; padding:10px; resize:none; }
-.button-group { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-.editor-only { display:none; }
-.public-view { width:100%; background:#1b1b1b; padding:15px; border:1px solid #333; border-radius:6px; min-height:50px; color:#ddd; }
-#ad-text, #ad-link { margin-top:5px; }
-#ad-link { padding:8px; border-radius:5px; border:1px solid #333; background:#1b1b1b; color:#ddd; }
-.ad-box { margin:5px 0; padding:8px; background:#222; border-radius:5px; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; margin:0; padding:0; background:#111; color:#eee; display:flex; flex-direction:column; min-height:100vh; }
+header { text-align:center; padding:60px 20px 40px; border-bottom:1px solid #222; position:relative; }
+header img { width:100px; height:100px; border-radius:50%; margin-bottom:15px; }
+header h1 { font-size:1.8rem; margin:10px 0 5px; font-weight:500; }
+header p { font-style:italic; color:#aaa; margin:0; }
+.top-right-btn { position:absolute; top:20px; right:20px; background:#0a8f6a; color:#fff; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; transition:0.3s; }
+.top-right-btn:hover { background:#087a59; }
+main { flex:1; display:flex; flex-direction:column; align-items:center; gap:30px; padding:20px; width:100%; max-width:900px; margin:0 auto; }
+a.join-btn { background:#0a8f6a; color:#fff; text-decoration:none; padding:14px 36px; border-radius:6px; font-size:1rem; transition:0.3s; }
+a.join-btn:hover { background:#087a59; }
+button, .secret-btn { background:transparent; color:#888; border:1px solid #333; padding:10px 25px; border-radius:5px; cursor:pointer; font-size:0.9rem; transition:all 0.3s; }
+button:hover, .secret-btn:hover { color:#fff; border-color:#0a8f6a; }
+textarea { width:100%; background:#1b1b1b; color:#ddd; border:1px solid #333; border-radius:6px; padding:10px; resize:none; font-family: monospace; }
 footer { text-align:center; padding:15px; font-size:0.9rem; color:#777; border-top:1px solid #222; }
 footer span { color:#0a8f6a; font-weight:600; }
+.public-view, .editor-only, #doc-editor, #special-section { width:100%; max-width:700px; margin-top:15px; }
+.editor-only { display:none; flex-direction:column; gap:10px; }
+#doc-text { height:600px; }
+.button-group { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
 </style>
 </head>
 <body>
@@ -41,35 +40,33 @@ footer span { color:#0a8f6a; font-weight:600; }
 <a href="https://psdroaregister.netlify.app/" class="join-btn" target="_blank">Join PSDROA</a>
 
 <!-- Special Purposes -->
-<section id="special-section" class="editor-only">
+<button class="secret-btn" onclick="accessSpecial()">Special Purposes</button>
+<div id="special-section" style="display:none;">
 <h3>Special Purposes Access</h3>
 <textarea></textarea>
-</section>
+</div>
 
 <!-- Announcement Section -->
-<section id="announcement-section">
-<h3>Announcement</h3>
+<div id="announcement-section">
+<h3>Announcements</h3>
 <div id="announcement-view" class="public-view">Loading announcement...</div>
-<div class="controls editor-only">
+<div class="editor-only">
 <textarea id="announcement-text"></textarea>
-<div class="button-group">
 <button id="save-ann-btn">Save Announcement</button>
 </div>
 </div>
-</section>
 
 <!-- Docs Section -->
-<section id="docs-section">
+<div id="docs-section">
 <h3>Docs</h3>
-<p>This is PSDROA's alternative to Notepad — for general purposes and code editing. Everyone can create docs; only authorized editors can delete. <strong>Load and read Bin ID 69038a52ae596e708f383670 before using.</strong></p>
-<div class="controls">
+<p>This is PSDROA's alternative to Notepad — for general purposes and code editing.</p>
 <div class="button-group">
 <button id="create-doc-btn">Create New Doc</button>
 <button id="load-doc-btn">Load Doc</button>
 </div>
-<div id="doc-editor" class="editor-only">
-<input type="text" id="current-doc-id" readonly>
-<p>⚠️ Save this Bin ID somewhere safe. You’ll need it to edit this doc in the future.</p>
+
+<div id="doc-editor" style="display:none;">
+<input type="text" id="current-doc-id" readonly placeholder="Bin ID will appear here">
 <textarea id="doc-text"></textarea>
 <div class="button-group">
 <button id="save-doc-btn">Save Doc</button>
@@ -78,210 +75,198 @@ footer span { color:#0a8f6a; font-weight:600; }
 </div>
 </div>
 </div>
-</section>
 
 <!-- Ads Section -->
-<section id="ads-section">
+<div id="ads-section">
 <h3>Advertisements</h3>
-<div id="ads-container" class="public-view">Loading ads...</div>
-<div class="controls editor-only">
-<textarea id="ad-text"></textarea>
-<input type="text" id="ad-link" placeholder="Optional URL">
+<div id="ads-view">No ads yet.</div>
+<div class="editor-only">
+<textarea id="ad-text" placeholder="Ad text"></textarea>
+<input type="text" id="ad-link" placeholder="Ad link (optional)">
 <button id="create-ad-btn">Create Ad</button>
-<p>Contact <a href="mailto:psdroa.official@gmail.com">psdroa.official@gmail.com</a> for inquiries.</p>
 </div>
-</section>
+<p style="color:#aaa; font-size:0.9rem;">For inquiries, mail <strong>psdroa.official@gmail.com</strong></p>
+</div>
 
 </main>
 
-<footer>© 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.</footer>
+<footer>
+© 2025 <span>PSDROA</span>. All rights reserved. | Made by the Republic.
+</footer>
 
 <script>
-// ====== CONFIG ======
-const SPECIAL_USER="psdadmin";
-const SPECIAL_PASS="A9x7qR!3";
-
-const ANN_USERS={ "Bryan":"Bry@2025!", "Jensen":"J3ns3n#Save", "Ahmad":"Ahm4d$Edit" };
-const ANN_BIN_ID="6903802ed0ea881f40c76129";
-
-const MASTER_KEY="$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
-const ACCESS_KEY="$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
-
-const ADS_BIN_KEY="690490fcae596e708f39f8bc"; 
-
-let currentDocId=null;
-
-// ====== Editor Login ======
-const editorLoginBtn=document.getElementById("editor-login-btn");
-editorLoginBtn.addEventListener("click",()=>{
-    const user=prompt("Editor Username:");
-    const pass=prompt("Password:");
-    if(user===SPECIAL_USER && pass===SPECIAL_PASS){
-        localStorage.setItem("editorLoggedIn","true");
-        document.querySelectorAll(".editor-only").forEach(e=>e.style.display="block");
-        alert("Editor access granted!");
-    } else alert("Access denied.");
-});
-if(localStorage.getItem("editorLoggedIn")==="true"){
-    document.querySelectorAll(".editor-only").forEach(e=>e.style.display="block");
+// ==== Special Purposes Login ====
+const SPECIAL_USER = "psdadmin";
+const SPECIAL_PASS = "A9x7qR!3";
+function accessSpecial(){
+  const user = prompt("Enter username:");
+  const pass = prompt("Enter password:");
+  if(user===SPECIAL_USER && pass===SPECIAL_PASS){
+    document.getElementById("special-section").style.display="flex";
+    alert("Access granted.");
+  } else { alert("Access denied."); }
 }
 
-// ====== Announcements ======
-const annView=document.getElementById("announcement-view");
-const annTextarea=document.getElementById("announcement-text");
-const saveAnnBtn=document.getElementById("save-ann-btn");
+// ==== Global Editors Login ====
+const GLOBAL_EDITORS = {
+  "Bryan":"Bry@2025!",
+  "Jensen":"J3ns3n#Save",
+  "Ahmad":"Ahm4d$Edit"
+};
+const editorLoginBtn = document.getElementById("editor-login-btn");
+editorLoginBtn.addEventListener("click", ()=>{
+  if(localStorage.getItem("editorLoggedIn")==="true"){
+    showEditorTools();
+    return;
+  }
+  const user = prompt("Editor Username:");
+  const pass = prompt("Password:");
+  if(GLOBAL_EDITORS[user] && GLOBAL_EDITORS[user]===pass){
+    localStorage.setItem("editorLoggedIn","true");
+    showEditorTools();
+  } else alert("Access denied.");
+});
+
+function showEditorTools(){
+  document.querySelectorAll(".editor-only").forEach(el=>el.style.display="flex");
+  alert("Editor tools enabled for this device.");
+}
+
+// ==== Announcements ====
+const ANN_BIN_ID = "6903802ed0ea881f40c76129";
+const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS";
+const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
+
+const annTextarea = document.getElementById("announcement-text");
+const annView = document.getElementById("announcement-view");
+const saveAnnBtn = document.getElementById("save-ann-btn");
 
 async function loadAnn(){
-    try{
-        const res=await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}/latest`,{
-            headers:{ "X-Master-Key": MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-        });
-        const data=await res.json();
-        const content=data.record?.content||"";
-        annView.textContent=content;
-        annTextarea.value=content;
-    } catch(err){ annView.textContent="No announcements."; }
+  try{
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}/latest`,{
+      headers:{ "X-Master-Key": MASTER_KEY,"X-Access-Key":ACCESS_KEY }
+    });
+    const data = await res.json();
+    const content = data.record?.content || "";
+    annTextarea.value = content;
+    annView.textContent = content;
+  } catch(err){ console.error(err); annView.textContent = "Failed to load announcement."; }
 }
 loadAnn();
 
-saveAnnBtn.addEventListener("click",async ()=>{
-    try{
-        await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}`,{
-            method:"PUT",
-            headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-            body: JSON.stringify({ content: annTextarea.value })
-        });
-        annView.textContent=annTextarea.value;
-        alert("Announcement saved!");
-    } catch(err){ alert("Failed to save."); }
+saveAnnBtn.addEventListener("click", async ()=>{
+  try{
+    await fetch(`https://api.jsonbin.io/v3/b/${ANN_BIN_ID}`,{
+      method:"PUT",
+      headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
+      body: JSON.stringify({ content: annTextarea.value })
+    });
+    annView.textContent = annTextarea.value;
+    alert("Announcement saved!");
+  } catch(err){ console.error(err); alert("Failed to save."); }
 });
 
-// ====== Docs ======
-const docEditor=document.getElementById("doc-editor");
-const docTextarea=document.getElementById("doc-text");
-const currentDocInput=document.getElementById("current-doc-id");
-const createDocBtn=document.getElementById("create-doc-btn");
-const loadDocBtn=document.getElementById("load-doc-btn");
-const saveDocBtn=document.getElementById("save-doc-btn");
-const deleteDocBtn=document.getElementById("delete-doc-btn");
-const exportDocBtn=document.getElementById("export-doc-btn");
+// ==== Docs ====
+let currentDocId = null;
+const docEditor = document.getElementById("doc-editor");
+const docTextarea = document.getElementById("doc-text");
+const currentDocInput = document.getElementById("current-doc-id");
+const createDocBtn = document.getElementById("create-doc-btn");
+const loadDocBtn = document.getElementById("load-doc-btn");
+const saveDocBtn = document.getElementById("save-doc-btn");
+const deleteDocBtn = document.getElementById("delete-doc-btn");
+const exportDocBtn = document.getElementById("export-doc-btn");
 
-createDocBtn.addEventListener("click",async ()=>{
-    const title=prompt("Enter doc title/ID:");
-    if(!title) return;
-    try{
-        const res=await fetch("https://api.jsonbin.io/v3/b",{
-            method:"POST",
-            headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-            body: JSON.stringify({ title, content:"" })
-        });
-        const data=await res.json();
-        currentDocId=data.metadata.id;
-        currentDocInput.value=currentDocId;
-        docTextarea.value="";
-        docEditor.style.display="block";
-        alert("New doc created! Bin ID: "+currentDocId);
-    } catch(err){ alert("Failed to create doc."); }
+createDocBtn.addEventListener("click", async ()=>{
+  const title = prompt("Enter doc title/ID:");
+  if(!title) return;
+  try{
+    const res = await fetch("https://api.jsonbin.io/v3/b",{
+      method:"POST",
+      headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
+      body: JSON.stringify({ title, content:"" })
+    });
+    const data = await res.json();
+    currentDocId = data.metadata.id;
+    currentDocInput.value = currentDocId;
+    docTextarea.value="";
+    docEditor.style.display="block";
+    alert("New doc created! Bin ID: "+currentDocId);
+  } catch(err){ console.error(err); alert("Failed to create doc."); }
 });
 
-loadDocBtn.addEventListener("click",async ()=>{
-    const binId=prompt("Enter Bin ID to load:");
-    if(!binId) return;
-    try{
-        const res=await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`,{
-            headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-        });
-        const data=await res.json();
-        currentDocId=binId;
-        currentDocInput.value=currentDocId;
-        docTextarea.value=data.record.content||"";
-        docEditor.style.display="block";
-        alert("Doc loaded.");
-    } catch(err){ alert("Failed to load doc."); }
+loadDocBtn.addEventListener("click", async ()=>{
+  const binId = prompt("Enter Bin ID to load:");
+  if(!binId) return;
+  try{
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`,{
+      headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
+    });
+    const data = await res.json();
+    currentDocId = binId;
+    currentDocInput.value = currentDocId;
+    docTextarea.value = data.record.content || "";
+    docEditor.style.display="block";
+    alert("Doc loaded.");
+  } catch(err){ console.error(err); alert("Failed to load doc."); }
 });
 
-saveDocBtn.addEventListener("click",async ()=>{
-    if(!currentDocId) return alert("No doc loaded.");
-    try{
-        await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
-            method:"PUT",
-            headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-            body: JSON.stringify({ content: docTextarea.value })
-        });
-        alert("Doc saved!");
-    } catch(err){ alert("Failed to save."); }
+saveDocBtn.addEventListener("click", async ()=>{
+  if(!currentDocId){ alert("No doc loaded."); return; }
+  try{
+    await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
+      method:"PUT",
+      headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
+      body: JSON.stringify({ content: docTextarea.value })
+    });
+    alert("Doc saved!");
+  } catch(err){ console.error(err); alert("Failed to save."); }
 });
 
-deleteDocBtn.addEventListener("click",async ()=>{
-    if(!currentDocId) return alert("No doc loaded.");
-    if(!confirm("Are you sure you want to delete this doc?")) return;
-    try{
-        await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
-            method:"DELETE",
-            headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-        });
-        currentDocId=null;
-        docTextarea.value="";
-        currentDocInput.value="";
-        docEditor.style.display="none";
-        alert("Doc deleted!");
-    } catch(err){ alert("Failed to delete."); }
+deleteDocBtn.addEventListener("click", async ()=>{
+  if(!currentDocId){ alert("No doc loaded."); return; }
+  if(!confirm("Are you sure you want to delete this doc?")) return;
+  try{
+    await fetch(`https://api.jsonbin.io/v3/b/${currentDocId}`,{
+      method:"DELETE",
+      headers:{ "X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY }
+    });
+    currentDocId=null;
+    docTextarea.value="";
+    currentDocInput.value="";
+    docEditor.style.display="none";
+    alert("Doc deleted!");
+  } catch(err){ console.error(err); alert("Failed to delete."); }
 });
 
-exportDocBtn.addEventListener("click",()=>{
-    const text=docTextarea.value;
-    if(!text) return alert("Nothing to export!");
-    const blob=new Blob([text], { type:"text/plain" });
-    const url=URL.createObjectURL(blob);
-    const link=document.createElement("a");
-    link.href=url;
-    link.download="PSDROA_doc.txt";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+exportDocBtn.addEventListener("click", ()=>{
+  const text = docTextarea.value;
+  if(!text){ alert("Nothing to export!"); return; }
+  const blob = new Blob([text], { type:"text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "PSDROA_doc.txt";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 });
 
-// ====== Ads ======
-const adsContainer=document.getElementById("ads-container");
-const adText=document.getElementById("ad-text");
-const adLink=document.getElementById("ad-link");
-const createAdBtn=document.getElementById("create-ad-btn");
+// ==== Ads ====
+const adsView = document.getElementById("ads-view");
+const adText = document.getElementById("ad-text");
+const adLink = document.getElementById("ad-link");
+const createAdBtn = document.getElementById("create-ad-btn");
 
-async function loadAds(){
-    try{
-        const res=await fetch(`https://api.jsonbin.io/v3/b/${ADS_BIN_KEY}/latest`,{
-            headers:{ "X-Master-Key": MASTER_KEY,"X-Access-Key":ACCESS_KEY }
-        });
-        const data=await res.json();
-        adsContainer.innerHTML="";
-        (data.record?.ads||[]).forEach(a=>{
-            const div=document.createElement("div");
-            div.className="ad-box";
-            div.innerHTML=a.link? `<a href="${a.link}" target="_blank">${a.text}</a>` : a.text;
-            adsContainer.appendChild(div);
-        });
-    } catch(err){ adsContainer.textContent="No ads available."; }
-}
-loadAds();
-
-createAdBtn.addEventListener("click",async ()=>{
-    if(localStorage.getItem("editorLoggedIn")!=="true") return alert("Access denied.");
-    const text=adText.value.trim();
-    if(!text) return alert("Ad text required.");
-    const link=adLink.value.trim() || null;
-    try{
-        const existingAds=[...document.querySelectorAll(".ad-box")].map(d=>({text:d.innerText, link:d.querySelector("a")?.href}));
-        existingAds.push({text, link});
-        await fetch(`https://api.jsonbin.io/v3/b/${ADS_BIN_KEY}`,{
-            method:"PUT",
-            headers:{ "Content-Type":"application/json","X-Master-Key":MASTER_KEY,"X-Access-Key":ACCESS_KEY },
-            body: JSON.stringify({ ads: existingAds })
-        });
-        adText.value=""; adLink.value="";
-        loadAds();
-        alert("Ad created!");
-    } catch(err){ alert("Failed to create ad."); }
+createAdBtn.addEventListener("click", ()=>{
+  if(!adText.value){ alert("Ad text required."); return; }
+  const adEl = document.createElement("div");
+  adEl.style.border="1px solid #333"; adEl.style.padding="8px"; adEl.style.margin="5px 0"; adEl.style.borderRadius="5px";
+  const linkHTML = adLink.value ? `<a href="${adLink.value}" target="_blank" style="color:#0a8f6a;">Link</a>` : "";
+  adEl.innerHTML = `<p>${adText.value}</p>${linkHTML}`;
+  adsView.appendChild(adEl);
+  adText.value=""; adLink.value="";
 });
 </script>
 
