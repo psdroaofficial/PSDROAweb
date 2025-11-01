@@ -95,17 +95,75 @@ footer span { color:#0a8f6a; font-weight:600; }
 </footer>
 
 <script>
-// ==== Special Purposes Login ====
+<script>
+// ==== Special Purposes Login & Data Retrieval ====
+
 const SPECIAL_USER = "psdadmin";
 const SPECIAL_PASS = "A9x7qR!3";
-function accessSpecial(){
+
+// Your JSON Bin details
+const SPECIAL_BIN_ID = "690377df43b1c97be98c57f7";
+const MASTER_KEY = "$2a$10$N7Wza0NGDUCgaPy3HFSYzOeK4WS5PUMeTrtLSPC9GzUmK.gf3Z/TS"; 
+const ACCESS_KEY = "$2a$10$wpzRqDW3wUNmYfvbnQnbw.wSicD9GaqJa86I3Jwr5QZbIC2mPuspi";
+
+const specialSection = document.getElementById("special-section");
+const specialText = document.getElementById("special-text");
+const saveSpecialBtn = document.getElementById("save-special-btn");
+
+// --- Login Function ---
+async function accessSpecial(){
   const user = prompt("Enter username:");
   const pass = prompt("Enter password:");
-  if(user===SPECIAL_USER && pass===SPECIAL_PASS){
-    document.getElementById("special-section").style.display="flex";
+
+  if(user === SPECIAL_USER && pass === SPECIAL_PASS){
     alert("Access granted.");
-  } else { alert("Access denied."); }
+    specialSection.style.display = "flex";
+    await loadSpecial(); // load from bin after successful login
+  } else {
+    alert("Access denied.");
+  }
 }
+
+// --- Load Data from JSON Bin ---
+async function loadSpecial(){
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${SPECIAL_BIN_ID}/latest`, {
+      headers: {
+        "X-Master-Key": MASTER_KEY,
+        "X-Access-Key": ACCESS_KEY
+      }
+    });
+    if (!res.ok) throw new Error("Failed to fetch data");
+    const data = await res.json();
+    specialText.value = data.record.content || "No data available.";
+  } catch (err) {
+    console.error(err);
+    alert("⚠️ Failed to load special data.");
+  }
+}
+
+// --- Save Data to JSON Bin ---
+async function saveSpecial(){
+  try {
+    await fetch(`https://api.jsonbin.io/v3/b/${SPECIAL_BIN_ID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": MASTER_KEY,
+        "X-Access-Key": ACCESS_KEY
+      },
+      body: JSON.stringify({ content: specialText.value })
+    });
+    alert("✅ Special data saved successfully!");
+  } catch (err) {
+    console.error(err);
+    alert("❌ Failed to save data.");
+  }
+}
+
+// Attach event to save button
+if(saveSpecialBtn) saveSpecialBtn.addEventListener("click", saveSpecial);
+</script>
 
 // ==== Global Editors Login ====
 const GLOBAL_EDITORS = {
